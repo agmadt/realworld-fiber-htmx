@@ -1,0 +1,19 @@
+  {{ if .Errors }}
+  <div class="alert alert-danger">
+    <ul>
+      {{ range $error := .Errors }}
+        <li>{{ $error }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  {{ if .SuccessMessages }}
+  <div class="alert alert-success">
+    <ul>
+      {{ range $message := .SuccessMessages }}
+        <li>{{ $message }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}

@@ -1,0 +1,90 @@
+<ul id="navbar" class="nav navbar-nav pull-xs-right"
+  hx-swap-oob="true"
+>
+  <li class="nav-item">
+    <a id="nav-link-home"
+      {{ if ne .NavBarActive "home" }}
+      href="/"
+      hx-get="/htmx/home"
+      hx-target="#app-body"
+      hx-push-url="/"
+      {{ end }}
+      class="nav-link{{ if eq .NavBarActive "home" }} active {{ end }}"
+    >
+      Home
+    </a>
+  </li>
+
+  {{ if not (IsAuthenticated .FiberCtx) }}
+  <li class="nav-item">
+    <a id="nav-link-sign-in"
+      {{ if ne .NavBarActive "sign-in" }}
+      href="/sign-in"
+      hx-get="/htmx/sign-in"
+      hx-target="#app-body"
+      hx-push-url="/sign-in"
+      {{ end }}
+      class="nav-link {{ if eq .NavBarActive "sign-in" }} active {{ end }}"
+    >
+      Sign in
+    </a>
+  </li>
+  <li class="nav-item">
+    <a id="nav-link-sign-up"
+      {{ if ne .NavBarActive "sign-up" }}
+      href="/sign-up"
+      hx-get="/htmx/sign-up"
+      hx-target="#app-body"
+      hx-push-url="/sign-up"
+      {{ end }}
+      class="nav-link {{ if eq .NavBarActive "sign-up" }} active {{ end }}"
+    >
+      Sign up
+    </a>
+  </li>
+  {{ end }}
+  
+  {{ if IsAuthenticated .FiberCtx }}
+  <li class="nav-item">
+    <a id="nav-link-editor"
+      {{ if ne .NavBarActive "editor" }}
+      href="/editor"
+      hx-get="/htmx/editor"
+      hx-target="#app-body"
+      hx-push-url="/editor"
+      {{ end }}
+      class="nav-link {{ if eq .NavBarActive "editor" }} active {{ end }}"
+    >
+      <i class="ion-compose"></i>
+      New Article
+    </a>
+  </li>
+  <li class="nav-item">
+    <a id="nav-link-settings"
+      {{ if ne .NavBarActive "settings" }}
+      href="/settings"
+      hx-get="/htmx/settings"
+      hx-target="#app-body"
+      hx-push-url="/settings"
+      {{ end }}
+      class="nav-link {{ if eq .NavBarActive "settings" }} active {{ end }}"
+    >
+      Settings
+    </a>
+  </li>
+  <li class="nav-item">
+    <a id="nav-link-profile"
+      {{ if ne .NavBarActive "profile" }}
+      href="/users/{{ .AuthenticatedUser.Username }}"
+      hx-get="/htmx/users/{{ .AuthenticatedUser.Username }}"
+      hx-target="#app-body"
+      hx-push-url="/users/{{ .AuthenticatedUser.Username }}"
+      {{ end }}
+      class="nav-link {{ if eq .NavBarActive "profile" }} active {{ end }}"
+    >
+      <img class="user-pic" src="{{ .AuthenticatedUser.Image }}">
+      {{ .AuthenticatedUser.Name }}
+    </a>
+  </li>
+  {{ end }}
+</ul>

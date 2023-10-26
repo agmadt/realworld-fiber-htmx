@@ -1,0 +1,51 @@
+<div class="profile-page">
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+          <img src="{{ .User.Image }}" class="user-img" />
+          <h4>{{ .User.Name }}</h4>
+          <p>{{ .User.Bio }}</p>
+
+          {{ if .IsSelf }}
+            <a class="btn btn-sm btn-outline-secondary action-btn"
+              href="/settings"
+              hx-push-url="/settings"
+              hx-get="/htmx/settings"
+              hx-target="#app-body"
+            >
+              <i class="ion-ios-gear"></i>
+              &nbsp;
+              Edit Profile Settings</span>
+            </a>
+          {{ else }}
+          
+            {{ template "users/partials/follow-button" . }}
+
+          {{ end }}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="posts-toggle">
+          <ul id="user-feed-navigation" class="nav nav-pills outline-active"></ul>
+        </div>
+        
+        <div id="user-post-preview"
+          {{ if .IsLoadFavorites }}
+            hx-get="/htmx/users/{{ .User.Username }}/favorites"
+          {{ else }}
+            hx-get="/htmx/users/{{ .User.Username }}/articles"
+          {{ end }}
+          hx-trigger="load"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

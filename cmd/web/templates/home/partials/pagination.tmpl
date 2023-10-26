@@ -1,0 +1,18 @@
+<nav id="feed-pagination" hx-swap-oob="true">
+  {{ if .HasPagination }}
+    {{ $CurrentPagination := .CurrentPagination }}
+    {{ $PathPagination := .PathPagination }}
+    {{ $PushPathPagination := .PushPathPagination }}
+    <ul class="pagination">
+      {{ range $index := Iterate 1 .TotalPagination }}
+        <li class="page-item {{ if eq $CurrentPagination $index }} active {{ end }}">
+          <a class="page-link"
+            href="/{{ $PathPagination }}?page={{ $index }}"
+            hx-push-url="/{{ $PushPathPagination }}?page={{ $index }}"
+            hx-get="/htmx/home/{{ $PathPagination }}?page={{ $index }}"
+          >{{ $index }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</nav>

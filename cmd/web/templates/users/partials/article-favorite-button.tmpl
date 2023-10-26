@@ -1,0 +1,12 @@
+<button class="btn btn-outline-primary btn-sm pull-xs-right {{ if .Article.IsFavorited }} active {{ end }}"
+  hx-post="/htmx/users/articles/{{ .Article.Slug }}/favorite"
+  
+  {{ if .IsSelf }}
+  hx-swap="delete"
+  hx-target="closest .post-preview"
+  {{ else }}
+  hx-swap="outerHTML"
+  {{ end }}
+>
+  <i class="ion-heart"></i> {{ .Article.GetFavoriteCount }}
+</button>

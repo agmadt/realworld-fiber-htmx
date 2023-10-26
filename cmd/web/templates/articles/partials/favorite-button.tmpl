@@ -1,0 +1,15 @@
+<button class="btn btn-outline-primary btn-sm {{ if .IsArticleFavorited }} active {{ end }} favorite-button"
+  hx-post="/htmx/articles/{{ .Article.Slug }}/favorite"
+  
+  {{ if .IsOob }}
+  hx-swap-oob="outerHTML:.favorite-button"
+  {{ end }}
+>
+  <i class="ion-heart"></i>
+  {{ if .IsArticleFavorited }}
+  Unfavorite Post    
+  {{ else }}
+  Favorite Post
+  {{ end }}
+  ({{ .Article.GetFavoriteCount }})
+</button>

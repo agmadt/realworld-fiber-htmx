@@ -1,0 +1,26 @@
+<div id="article-comments-wrapper">
+  {{ range $comment := .Article.Comments }}
+    {{ template "articles/partials/comments-card" Dict "Comment" $comment }}
+  {{ end }}
+</div>
+
+{{ if .IsAuthenticated }}
+  <div id="form-message"></div>
+
+  {{ template "articles/partials/comments-form" . }}
+{{ else }}
+  <div>
+    <a href="/htmx/sign-in" hx-get="/htmx/sign-in" hx-target="#app-body"
+      hx-push-url="/sign-in"
+    >
+      Sign in
+    </a>
+    or
+    <a href="/htmx/sign-up" hx-get="/htmx/sign-up" hx-target="#app-body"
+      hx-push-url="/sign-up"
+    >
+      sign up
+    </a>
+    to add comments on this article.
+  </div>
+{{ end }}

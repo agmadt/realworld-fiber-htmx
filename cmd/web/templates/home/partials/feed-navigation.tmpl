@@ -1,0 +1,17 @@
+<ul id="feed-navigation" class="nav nav-pills outline-active" hx-swap-oob="true">
+  {{ range $item := .FeedNavbarItems }}
+    <li class="nav-item">
+      <a class="nav-link {{ if $item.IsActive }} active {{ end }}"
+        {{ if not $item.IsActive }}
+          href="{{ $item.HXPushURL }}"
+          hx-get="{{ $item.HXGetURL }}"
+          hx-trigger="click"
+          hx-target="#feed-post-preview"
+          hx-push-url="{{ $item.HXPushURL }}"
+        {{ end }}
+      >
+        {{ $item.Title }}
+      </a>
+    </li>
+  {{ end }}
+</ul>

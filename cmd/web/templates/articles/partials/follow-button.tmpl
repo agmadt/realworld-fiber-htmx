@@ -1,0 +1,17 @@
+<button class="btn btn-sm btn-outline-secondary follow-button"
+  hx-post="/htmx/articles/follow-user/{{ .Article.Slug }}"
+  
+  {{ if .IsOob }}
+  hx-swap-oob="outerHTML:.follow-button"
+  {{ end }}
+>
+  {{ if .IsFollowed }}
+  <i class="ion-minus-round"></i>
+    Unfollow 
+  {{ else }}
+    <i class="ion-plus-round"></i>
+    Follow 
+  {{ end }}
+  {{ .Article.User.Name }} 
+  <span class="counter">({{ .Article.User.FollowersCount }})</span>
+</button>

@@ -1,0 +1,15 @@
+<div id="form-message"
+  {{ if .IsOob }}
+  hx-swap-oob="true"
+  {{ end }}
+>
+  {{ if .Errors }}
+  <div class="alert alert-danger">
+    <ul>
+      {{ range $error := .Errors }}
+        <li>{{ $error }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</div>

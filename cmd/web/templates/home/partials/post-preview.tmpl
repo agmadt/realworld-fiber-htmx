@@ -1,0 +1,60 @@
+<div id="feed-post-preview" hx-swap-oob="true">
+  {{ if .HasArticles }}
+    {{ range $article := .Articles }}
+
+    <div class="post-preview">
+      <div class="post-meta">
+        <a href="/users/{{ $article.User.Username }}"
+          hx-push-url="/users/{{ $article.User.Username }}"
+          hx-get="/htmx/users/{{ $article.User.Username }}"
+          hx-target="#app-body"
+        >
+          <img src="{{ $article.User.Image }}" />
+        </a>
+
+        <div class="info">
+          <a href="/users/{{ $article.User.Username }}"
+            hx-push-url="/users/{{ $article.User.Username }}"
+            hx-get="/htmx/users/{{ $article.User.Username }}"
+            hx-target="#app-body"
+            class="author"
+          >
+            {{ $article.User.Name }}
+          </a>
+          <span class="date">{{ $article.GetFormattedCreatedAt }}</span>
+        </div>
+
+        {{ template "home/partials/article-favorite-button" $article }}
+
+      </div>
+      <a href="/articles/{{ $article.Slug }}"
+        hx-push-url="/articles/{{ $article.Slug }}"
+        hx-get="/htmx/articles/{{ $article.Slug }}"
+        hx-target="#app-body"
+        class="preview-link"
+      >
+        <h1>{{ $article.Title }}</h1>
+        <p>{{ $article.Description }}</p>
+
+        <div class="m-t-1">
+          <span>Read more...</span>
+
+          <ul class="tag-list">
+            {{ range $tag := $article.Tags }}
+            <li class="tag-default tag-pill tag-outline">{{ $tag.Name }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </a>
+    </div>
+    {{ end }}
+  {{ end }}
+  
+  {{ if not .HasArticles }}
+  <div class="post-preview">
+    <div class="alert alert-warning" role="alert">
+      No articles are here... yet.
+    </div>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,38 @@
+<div class="post-page">
+
+  <div class="banner">
+    <div class="container">
+      <h1 id="article-detail__title">
+        {{ .Article.Title }}
+      </h1>
+      
+      {{ template "articles/partials/detail-post-meta" . }}
+    </div>
+  </div>
+
+  <div class="article-detail container page">
+    <div class="row post-content">
+      <div class="col-md-12">
+        {{ .Article.Body }}
+      </div>
+      <div class="col-md-12 m-t-2">
+        <ul class="tag-list">
+          {{ range $tag := .Article.Tags }}
+          <li class="tag-default tag-pill tag-outline">{{ $tag.Name }}</li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="post-actions">
+      {{ template "articles/partials/detail-post-meta" . }}
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2" hx-get="/htmx/articles/{{ .Article.Slug }}/comments" hx-trigger="load"></div>
+    </div>
+
+  </div>
+</div>

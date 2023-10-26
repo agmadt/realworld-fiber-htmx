@@ -1,0 +1,12 @@
+<div id="popular-tag-list" class="tag-list" hx-swap-oob="true">
+  {{ if .HasTags }}
+    {{ range $tag := .Tags }}
+    <a class="label label-pill label-default"
+      href="/tag-feed/{{ $tag.Name }}"
+      hx-get="/htmx/home/tag-feed/{{ $tag.Name }}"
+      hx-target="#feed-post-preview"
+      hx-push-url="/tag-feed/{{ $tag.Name }}"
+    >{{ $tag.Name }}</a>
+    {{ end }}
+  {{ end }}
+</div>

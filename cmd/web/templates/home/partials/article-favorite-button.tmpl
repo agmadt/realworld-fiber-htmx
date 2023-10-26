@@ -1,0 +1,6 @@
+<button class="btn btn-outline-primary btn-sm pull-xs-right {{ if .IsFavorited }} active {{ end }}"
+  hx-post="/htmx/home/articles/{{ .Slug }}/favorite"
+  hx-swap="outerHTML"
+>
+  <i class="ion-heart"></i> {{ .GetFavoriteCount }}
+</button>

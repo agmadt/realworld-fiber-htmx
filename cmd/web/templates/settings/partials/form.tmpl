@@ -1,0 +1,25 @@
+<form
+  action="/settings"
+  method="POST"
+  hx-post="/htmx/settings"
+  id="settings-form"
+>
+  <fieldset class="form-group">
+    <input class="form-control" type="text" placeholder="URL of profile picture" value="{{ .AuthenticatedUser.Image }}" name="image_url">
+  </fieldset>
+  <fieldset class="form-group">
+    <input class="form-control form-control-lg" type="text" placeholder="Your Name" value="{{ .AuthenticatedUser.Name }}" name="name">
+  </fieldset>
+  <fieldset class="form-group">
+    <textarea class="form-control form-control-lg" rows="8" placeholder="Short bio about you" name="bio">{{ .AuthenticatedUser.Bio }}</textarea>
+  </fieldset>
+  <fieldset class="form-group">
+    <input class="form-control form-control-lg" type="email" placeholder="Email" value="{{ .AuthenticatedUser.Email }}" name="email">
+  </fieldset>
+  <fieldset class="form-group">
+    <input class="form-control form-control-lg" type="password" placeholder="Password" name="password">
+  </fieldset>
+  <button class="btn btn-lg btn-primary pull-xs-right" hx-post="/htmx/settings" hx-swap="none">
+    Update Settings
+  </button>
+</form>
