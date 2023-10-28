@@ -3,16 +3,15 @@ package authentication
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
-	"github.com/gofiber/storage/mysql"
+	"github.com/gofiber/storage/sqlite3"
 )
 
 var StoredAuthenticationSession *session.Store
 
 func SessionStart() {
 
-	store := mysql.New(mysql.Config{
-		ConnectionURI: "root@tcp(127.0.0.1:3306)/conduit?charset=utf8mb4&parseTime=True&loc=Local",
-		Table:         "fiber_storage",
+	store := sqlite3.New(sqlite3.Config{
+		Table: "fiber_storage",
 	})
 
 	authSession := session.New(session.Config{
