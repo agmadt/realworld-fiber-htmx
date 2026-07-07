@@ -1,19 +1,18 @@
-FROM golang:1.23-alpine AS builder
+FROM golang:1.22-alpine AS builder
 
 WORKDIR /build
-
-RUN apk add --no-cache gcc musl-dev
 
 COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=1 GOOS=linux go build -o realworld-fiber-htmx .
+ENV GOTOOLCHAIN=local
+RUN CGO_ENABLED=0 GOOS=linux go build -o realworld-fiber-htmx .
 
 FROM alpine:3
 
-RUN apk add --no-cache gcompat wget
+RUN apk add --no-cache wget
 
 WORKDIR /app
 
