@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        APP_PORT: ${APP_PORT:-8181}
+    restart: unless-stopped
+    environment:
+      APP_ADDR: 0.0.0.0:${APP_PORT:-8181}
+    expose:
+      - "${APP_PORT:-8181}"
+    volumes:
+      - sqlite_data:/app
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:${APP_PORT:-8181}/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  sqlite_data:

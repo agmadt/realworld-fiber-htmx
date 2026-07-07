@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"realworld-fiber-htmx/cmd/web"
 	"realworld-fiber-htmx/internal/authentication"
 	"realworld-fiber-htmx/internal/database"
@@ -31,5 +32,10 @@ func main() {
 
 	web.Serve(app)
 
-	log.Fatal(app.Listen("localhost:8181"))
+	addr := "localhost:8181"
+	if a := os.Getenv("APP_ADDR"); a != "" {
+		addr = a
+	}
+
+	log.Fatal(app.Listen(addr))
 }
