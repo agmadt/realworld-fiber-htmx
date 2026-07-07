@@ -1,5 +1,4 @@
 .air.toml
 .git
 .env
-*.sqlite
 realworld-fiber-htmx
